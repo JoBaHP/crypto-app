@@ -8,7 +8,7 @@ import {
   FundOutlined,
   MenuOutlined,
 } from "@ant-design/icons";
-import { icons } from "antd/lib/image/PreviewGroup";
+/* import { icons } from "antd/lib/image/PreviewGroup"; */
 /* import icon from "../images/cryptocurrency.png"; */
 
 function Navbar() {
