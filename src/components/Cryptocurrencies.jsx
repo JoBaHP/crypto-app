@@ -46,7 +46,7 @@ const Cryptocurrencies = ({ simplified }) => {
             key={currency.uuid}
           >
             {/* Note: Change currency.id to currency.uuid  */}
-            <Link key={currency.uuid} to={`/crypto/${currency.uuid}`}>
+            <Link key={currency.uuid} to={`/coin/${currency.uuid}`}>
               <Card
                 title={`${currency.rank}. ${currency.name}`}
                 extra={<img className="crypto-image" src={currency.iconUrl} />}

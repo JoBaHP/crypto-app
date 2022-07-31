@@ -26,12 +26,12 @@ const { Title, Text } = Typography;
 const { Option } = Select;
 
 const CryptoDetails = () => {
-  const { coinId } = useParams();
-  const [timeperiod, setTimeperiod] = useState("7d");
-  const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
+  const { uuid } = useParams();
+  const [timePeriod, setTimePeriod] = useState("7d");
+  const { data, isFetching } = useGetCryptoDetailsQuery(uuid);
   const { data: coinHistory } = useGetCryptoHistoryQuery({
-    coinId,
-    timeperiod,
+    uuid,
+    timePeriod,
   });
   const cryptoDetails = data?.data?.coin;
 
@@ -109,28 +109,32 @@ const CryptoDetails = () => {
     <Col className="coin-detail-container">
       <Col className="coin-heading-container">
         <Title level={2} className="coin-name">
-          {data?.data?.coin.name} ({data?.data?.coin.symbol}) Price
+          {cryptoDetails.name} ({cryptoDetails.symbol}) Price
         </Title>
         <p>
-          {cryptoDetails.name} live price in US Dollar (USD). View value
-          statistics, market cap and supply.
+          {cryptoDetails.name} live price in US dollars. View value statistics,
+          market cap and supply.
         </p>
       </Col>
       <Select
         defaultValue="7d"
         className="select-timeperiod"
-        placeholder="Select Timeperiod"
-        onChange={(value) => setTimeperiod(value)}
+        placeholder="Select Time Period"
+        onChange={(value) => setTimePeriod(value)}
       >
         {time.map((date) => (
-          <Option key={date}>{date}</Option>
+          <Option key={date}>{date} </Option>
         ))}
       </Select>
+
+      {/* -------- Line Chart ---------- */}
       <LineChart
         coinHistory={coinHistory}
-        currentPrice={millify(cryptoDetails?.price)}
-        coinName={cryptoDetails?.name}
+        currentPrice={millify(cryptoDetails.price)}
+        coinName={cryptoDetails.name}
+        timePeriod={timePeriod}
       />
+
       <Col className="stats-container">
         <Col className="coin-value-statistics">
           <Col className="coin-value-statistics-heading">
